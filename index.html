@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>知识付费课程平台（精简开源版）</title>
+<meta name="description" content="免费开源的知识付费课程平台精简版：课程浏览与筛选、免费试看、在线购课、学习进度跟踪，后台课程与课时管理，真实增删改查功能，纯前端+localStorage实现，可作为学习或二次开发起点。">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">课学<span class="accent">堂</span></div>
+    <div class="topbar-right">
+      <span class="balance-badge" id="balanceBadge">钱包余额 ¥0</span>
+      <a href="admin.html" class="nav-link">进入讲师后台 →</a>
+    </div>
+  </header>
+
+  <main class="container view active" id="view-catalog">
+    <div class="page-head">
+      <h1>挑一门想学的课</h1>
+      <p>每门课程都有免费试看课时，点进去先看看再决定要不要买。这是一个真实可用的精简开源系统，购课、学习进度都会保存在你浏览器本地。</p>
+    </div>
+    <div class="filter-row" id="categoryFilters"></div>
+    <div class="filter-row">
+      <select id="priceFilter" class="filter-select">
+        <option value="all">全部价格</option>
+        <option value="low">¥50 及以下</option>
+        <option value="mid">¥50 - ¥150</option>
+        <option value="high">¥150 以上</option>
+      </select>
+    </div>
+    <div id="courseGrid" class="course-grid"></div>
+  </main>
+
+  <main class="container view" id="view-detail"></main>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

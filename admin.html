@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>讲师后台 · 知识付费课程平台（精简开源版）</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="sidebar">
+      <div class="brand">课学<span class="accent">堂</span> 后台</div>
+      <div class="side-link active" data-view="dashboard">仪表盘</div>
+      <div class="side-link" data-view="courses">课程管理</div>
+      <div class="side-link" data-view="lessons">课时管理</div>
+      <div class="side-link" id="btnResetData" style="margin-top:20px;color:var(--red)">重置示例数据</div>
+      <a href="index.html" class="side-link">← 返回前台</a>
+    </aside>
+
+    <main class="admin-main">
+      <section id="view-dashboard" class="admin-view active">
+        <div class="page-head"><h1>仪表盘</h1><p>课程、购课与学习进度总览。</p></div>
+        <div class="stat-grid" id="statGrid"></div>
+        <table>
+          <thead><tr><th>最近购课</th><th>课程</th><th>购买时间</th><th>价格</th></tr></thead>
+          <tbody id="recentEnrollmentsBody"></tbody>
+        </table>
+      </section>
+
+      <section id="view-courses" class="admin-view">
+        <div class="page-head"><h1>课程管理</h1><p>添加、编辑或删除课程。</p></div>
+        <div class="table-toolbar">
+          <span></span>
+          <button class="btn btn-primary btn-sm" id="btnAddCourse">+ 新增课程</button>
+        </div>
+        <table>
+          <thead><tr><th>课程</th><th>讲师</th><th>分类</th><th>价格</th><th>课时数</th><th>操作</th></tr></thead>
+          <tbody id="coursesBody"></tbody>
+        </table>
+      </section>
+
+      <section id="view-lessons" class="admin-view">
+        <div class="page-head"><h1>课时管理</h1><p>选择一门课程，管理它的课时列表。</p></div>
+        <div class="table-toolbar">
+          <select id="lessonCourseSelect" class="filter-select"></select>
+          <button class="btn btn-primary btn-sm" id="btnAddLesson">+ 新增课时</button>
+        </div>
+        <table>
+          <thead><tr><th>序号</th><th>标题</th><th>时长</th><th>试看</th><th>操作</th></tr></thead>
+          <tbody id="lessonsBody"></tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="courseModalBackdrop">
+    <div class="modal">
+      <button class="modal-close" id="btnCloseCourseModal">&times;</button>
+      <h2 id="courseModalTitle">新增课程</h2>
+      <div id="courseModalMsg"></div>
+      <form id="courseForm" novalidate>
+        <input type="hidden" id="courseIdInput">
+        <div class="field"><label>课程标题</label><input id="courseTitleInput" type="text" required></div>
+        <div class="field-row">
+          <div class="field"><label>讲师</label><input id="courseInstructorInput" type="text" required></div>
+          <div class="field"><label>分类</label><input id="courseCategoryInput" type="text" required placeholder="如：编程 / 设计 / 运营"></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label>价格（元）</label><input id="coursePriceInput" type="number" min="0" required></div>
+          <div class="field"><label>封面 Emoji</label><input id="courseEmojiInput" type="text" maxlength="4" placeholder="如：📊"></div>
+        </div>
+        <div class="field"><label>课程简介</label><textarea id="courseDescInput" rows="3"></textarea></div>
+        <button type="submit" class="btn btn-primary btn-block">保存</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="lessonModalBackdrop">
+    <div class="modal">
+      <button class="modal-close" id="btnCloseLessonModal">&times;</button>
+      <h2 id="lessonModalTitle">新增课时</h2>
+      <div id="lessonModalMsg"></div>
+      <form id="lessonForm" novalidate>
+        <input type="hidden" id="lessonIdInput">
+        <div class="field"><label>课时标题</label><input id="lessonTitleInput" type="text" required></div>
+        <div class="field-row">
+          <div class="field"><label>时长（分钟）</label><input id="lessonDurationInput" type="number" min="1" required></div>
+          <div class="field checkbox-field"><label><input id="lessonPreviewInput" type="checkbox"> 设为免费试看课时</label></div>
+        </div>
+        <div class="field"><label>课时内容简介</label><textarea id="lessonContentInput" rows="3" required></textarea></div>
+        <button type="submit" class="btn btn-primary btn-block">保存</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
